@@ -1,0 +1,36 @@
+erver {
+
+    listen   80; ## listen for ipv4
+    listen   [::]:80 default ipv6only=on; ## listen for ipv6
+
+    server_name  stats.ganetimgr.example.com;
+
+    access_log  /var/log/nginx/stats.ganetimgr.access.log;
+
+    location /robots.txt {
+        return 204;
+    }   
+
+    location /favicon.ico {
+        return 204;
+        access_log      off;
+        log_not_found   off;
+    }   
+
+    location /nginx_status {
+      stub_status on; 
+      access_log   off;
+      allow 127.0.0.1;
+      deny all;
+    }   
+
+    location / { 
+        root /var/www;
+    }   
+
+
+    location ~ ^/(.+)/.+\.png(/(.+),(.+))?$ {
+        proxy_pass   http://127.0.0.1:8000;
+    }   
+}
+

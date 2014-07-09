@@ -1,0 +1,12 @@
+CONFIG = { 
+    'mode': 'wsgi',
+    'working_dir': '/usr/local/lib/vima_grapher',
+    'user': 'www-data',
+    'group': 'www-data',
+    'args': (
+        '--bind=127.0.0.1:8000',
+        '--workers=2',
+        '--timeout=20',
+        'vima_grapher_timevars:app',
+    ),  
+}
